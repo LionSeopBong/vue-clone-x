@@ -15,9 +15,14 @@ export default {
 body {
   background: black;
   color: rgb(238, 237, 237);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 .container {
   height: 100vh;
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -41,5 +46,10 @@ body {
   padding: 10px;
   width: 100%;
   cursor: pointer;
+}
+.error-massege {
+  color: red;
+  font-size: small;
+  width: 100%;
 }
 </style>

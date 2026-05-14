@@ -3,8 +3,8 @@
     <img src="../assets/x-logo.png" class="logo" />
   </div>
   <div>
-    <InputFiled :type="'text'" :placeholder="'Email'" v-model="email" />
-    <InputFiled :type="'password'" :placeholder="'Password'" v-model="password" />
+    <InputFiled :type="'text'" :placeholder="'Email'" v-model="email" :errorMsg="'이메일을 입력하세요.'" />
+    <InputFiled :type="'password'" :placeholder="'Password'" v-model="password" :errorMsg="'비밀번호를 입력하세요.'" />
 
     <button class="button" @click="login">로그인하기</button>
     <div>
