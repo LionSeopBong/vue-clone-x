@@ -1,0 +1,45 @@
+<template>
+  <div class="logo-container">
+    <img src="../assets/x-logo.png" class="logo" />
+  </div>
+  <div class="title">계정을 생성하세요</div>
+  <InputFiled :type="'text'" :placeholder="'Email'" v-model="email" />
+  <InputFiled :type="'name'" :placeholder="'Name'" v-model="name" />
+  <InputFiled :type="'password'" :placeholder="'Password'" v-model="password" />
+  <InputFiled :type="'passwordConfirm'" :placeholder="'PasswordConfirm'" v-model="passwordConfirm" />
+  <button class="button" @click="signup">회원가입</button>
+</template>
+
+<script>
+import InputFiled from "@/components/InputFiled.vue";
+export default {
+  name: "SignUpPage",
+  components: { InputFiled },
+  data() {
+    return { email: "", name: "", password: "", passwordConfirm: "" };
+  },
+  methods: {
+    signup() {
+      if (!this.email || !this.password || !this.name || !this.passwordConfirm) {
+        alert("모든 필드를 입력해주세요.");
+        return;
+      } else if (this.password === this.passwordConfirm) {
+        alert("로그인 성공");
+        // console.log("")
+      } else if (this.password !== this.passwordConfirm) {
+        alert("입력된 Password 와 확인 password가 다릅니다");
+      }
+      this.$router.push("/");
+    },
+  },
+};
+</script>
+
+<style>
+.title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: large;
+  padding: 1%;
+}
+</style>

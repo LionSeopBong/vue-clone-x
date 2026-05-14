@@ -1,19 +1,24 @@
 <template>
+  <div class="logo-container">
+    <img src="../assets/x-logo.png" class="logo" />
+  </div>
   <div>
-    <input type="text" placeholder="Email" v-model="email" />
-    <input type="password" placeholder="Password" v-model="password" />
+    <InputFiled :type="'text'" :placeholder="'Email'" v-model="email" />
+    <InputFiled :type="'password'" :placeholder="'Password'" v-model="password" />
 
-    <button>로그인하기</button>
+    <button class="button" @click="login">로그인하기</button>
     <div>
       계정이 없으신가요?
-      <span>가입하기</span>
+      <router-link class="signup-button" to="/signup">가입하기</router-link>
     </div>
   </div>
 </template>
 
 <script>
+import InputFiled from "@/components/InputFiled.vue";
 export default {
   name: "LoginPage",
+  components: { InputFiled },
   data() {
     return {
       email: "",
@@ -22,10 +27,19 @@ export default {
   },
   methods: {
     login() {
-      console.log(this.email, this.password);
+      if (!this.email || !this.password) {
+        alert("모든 필드를 입력해주세요.");
+        return;
+      }
+      console.log("로그인 성공", this.email, this.password);
     },
   },
 };
 </script>
 
-<style></style>
+<style>
+.signup-button {
+  color: aqua;
+  cursor: pointer;
+}
+</style>
