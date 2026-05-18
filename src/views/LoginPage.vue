@@ -27,11 +27,12 @@ export default {
   },
   methods: {
     login() {
-      if (!this.email || !this.password) {
-        alert("모든 필드를 입력해주세요.");
-        return;
-      }
-      console.log("로그인 성공", this.email, this.password);
+      this.$router.push("/main");
+      // if (!this.email || !this.password) {
+      //   alert("모든 필드를 입력해주세요.");
+      //   return;
+      // }
+      // console.log("로그인 성공", this.email, this.password);
     },
   },
 };
