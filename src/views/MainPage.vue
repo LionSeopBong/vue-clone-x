@@ -5,7 +5,7 @@
       <div>User님</div>
     </div>
     <TweetBar />
-    <FeedList :feeds="feeds" />
+    <FeedList />
   </div>
 </template>
 

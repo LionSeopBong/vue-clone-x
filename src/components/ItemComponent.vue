@@ -1,10 +1,17 @@
 <template>
-  <div></div>
+  <li>
+    <span> {{ item.id }} - </span>
+    <span>{{ item.name }}</span>
+  </li>
 </template>
 
 <script>
 export default {
   name: "ItemComponent",
+  props: ["item"],
+  updated() {
+    console.log("updated : ", this.item.id, this.item.name);
+  },
 };
 </script>
 
