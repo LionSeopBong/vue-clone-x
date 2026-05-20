@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     handleDelete(id) {
-      this.feedStore.deleteFeed(id);
+      this.feedStore.removeFeed(id);
     },
   },
 };

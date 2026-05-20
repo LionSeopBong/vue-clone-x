@@ -85,7 +85,7 @@ export const useFeedStore = defineStore("Feed", {
     initFeed() {
       this.feed = feedData;
     },
-    deleteFeed(id) {
+    removeFeed(id) {
       this.feed = this.feed.filter((feed) => feed.id != id);
     },
   },
