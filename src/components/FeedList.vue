@@ -22,7 +22,7 @@ export default {
   },
   components: { FeedItem },
   created() {
-    this.feedStore.initFeed();
+    this.feedStore.getFeedData();
   },
   methods: {
     handleDelete(id) {

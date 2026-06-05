@@ -2,10 +2,11 @@
   <div>
     <div class="title-container">
       <h2>Home</h2>
-      <div>{{ userStore.getUserName }}님</div>
+      <div>{{ userStore.name }}님</div>
     </div>
     <TweetBar />
     <FeedList />
+    <div class="logout" @click="logout">logout</div>
   </div>
 </template>
 
@@ -21,6 +22,12 @@ export default {
       userStore: useUserStore(),
     };
   },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
@@ -30,5 +37,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.logout {
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+  color: red;
+  cursor: pointer;
 }
 </style>

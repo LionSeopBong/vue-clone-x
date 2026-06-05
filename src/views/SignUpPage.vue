@@ -12,6 +12,7 @@
 </template>
 
 <script>
+import { api } from "@/api";
 import InputFiled from "@/components/InputFiled.vue";
 export default {
   name: "SignUpPage",
@@ -20,17 +21,27 @@ export default {
     return { email: "", name: "", password: "", passwordConfirm: "" };
   },
   methods: {
-    signup() {
+    async signup() {
       if (!this.email || !this.password || !this.name || !this.passwordConfirm) {
         alert("모든 필드를 입력해주세요.");
         return;
-      } else if (this.password === this.passwordConfirm) {
-        alert("로그인 성공");
-        // console.log("")
-      } else if (this.password !== this.passwordConfirm) {
-        alert("입력된 Password 와 확인 password가 다릅니다");
       }
-      this.$router.push("/");
+      if (this.password !== this.passwordConfirm) {
+        alert("입력된 Password 와 확인 password가 다릅니다");
+        return;
+      }
+      try {
+        const response = await api.post("/users", {
+          name: this.name,
+          email: this.email,
+          password: this.password,
+        });
+        console.log("회원가입 성공:", response.data);
+        this.$router.push("/");
+      } catch (error) {
+        console.log("회원가입 실패", error);
+        alert("회원가입 실패");
+      }
     },
   },
   computed: {

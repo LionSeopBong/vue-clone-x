@@ -15,24 +15,42 @@
 </template>
 
 <script>
+import { api } from "@/api";
 import InputFiled from "@/components/InputFiled.vue";
+import { useUserStore } from "@/store/User";
 export default {
   name: "LoginPage",
   components: { InputFiled },
   data() {
     return {
+      userStore: useUserStore(),
       email: "",
       password: "",
     };
   },
   methods: {
-    login() {
-      this.$router.push("/main");
-      // if (!this.email || !this.password) {
-      //   alert("모든 필드를 입력해주세요.");
-      //   return;
-      // }
-      // console.log("로그인 성공", this.email, this.password);
+    async login() {
+      if (!this.email || !this.password) {
+        alert("모든 필드를 입력해주세요");
+        return;
+      }
+      const payload = {
+        email: this.email,
+        password: this.password,
+      };
+      try {
+        const response = await api.post("/users/login", payload);
+        console.log("로그인성공");
+        this.userStore.setUser(response.data);
+        this.userStore.saveToken(response.data.access_token);
+        console.log("리스폰데이터:", response.data);
+        console.log("유저 이름:", this.userStore.name);
+        this.$router.push("/main");
+      } catch (error) {
+        console.log(payload.email, payload.password);
+        console.log("로그인 실패");
+        alert("로그인 실패!");
+      }
     },
   },
 };

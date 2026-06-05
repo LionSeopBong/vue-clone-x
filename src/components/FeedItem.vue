@@ -4,7 +4,7 @@
       <div class="feed-content">{{ feed.content }}</div>
       <button class="feed-delete-button" @click="handleClick()">X</button>
     </div>
-    <div class="feed-name">{{ feed.user.name }}</div>
+    <div class="feed-name">{{ feed.user?.name }}</div>
   </div>
 </template>
 
@@ -37,8 +37,7 @@ export default {
          */
         callback: (confirm) => {
           if (confirm) {
-            console.log("삭제");
-            this.$emit("delete", this.feed.id);
+            this.feedStore.removeFeed(this.feed.id);
           }
         },
       });

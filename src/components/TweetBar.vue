@@ -1,15 +1,31 @@
 <template>
   <div class="container">
     <div>
-      <input type="text" placeholder="what's good, user?" class="input-form" />
-      <img src="@/assets/search.png" class="search-icon" />
+      <input type="text" :placeholder="userStore.placeholder" class="input-form" v-model="tweetContent" />
+      <img src="@/assets/search.png" class="search-icon" @click="tweet" />
     </div>
   </div>
 </template>
 
 <script>
+import { useFeedStore } from "@/store/Feed";
+import { useUserStore } from "@/store/User";
+
 export default {
   name: "TweetBar",
+  data() {
+    return {
+      tweetContent: "",
+      userStore: useUserStore(),
+      feedStore: useFeedStore(),
+    };
+  },
+  methods: {
+    async tweet() {
+      await this.feedStore.addFeed(this.tweetContent);
+      this.tweetContent = "";
+    },
+  },
 };
 </script>
 

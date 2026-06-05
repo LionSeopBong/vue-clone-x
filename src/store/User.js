@@ -1,13 +1,33 @@
 import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
-  state: () => ({
-    //유저 정보
-    user: { id: 1, name: "김유저" },
-  }),
-  getters: {
-    // 유저이름 반환
-    getUserName: (state) => state.user.name,
+  state: () => {
+    const userData = JSON.parse(localStorage.getItem("user")) || {};
+    return {
+      name: userData.name || "",
+      id: userData.id || "",
+      email: userData.email || "",
+    };
   },
-  actions: {},
+  getters: {
+    placeholder: (state) => "what's good" | (state.name + "?"),
+  },
+  actions: {
+    setUser(res) {
+      (this.name = res.name),
+        (this.id = res.id),
+        (this.email = res.email),
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            name: res.name,
+            id: res.id,
+            email: res.email,
+          }),
+        );
+    },
+    saveToken(accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+    },
+  },
 });
